@@ -11,6 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<Quiz> quizs = [];
   bool isLoading = false;
 
@@ -57,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onWillPop: () async => false,
       child: SafeArea(
         child: Scaffold(
+          key: _scaffoldKey,
           appBar: AppBar(
             title: Text("My Quiz App"),
             backgroundColor: Colors.deepPurple,
@@ -111,6 +113,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       color: Colors.deepPurple,
                       onPressed: () {
+                        _scaffoldKey.currentState.showSnackBar(
+                          SnackBar(
+                            content: Row(
+                              children: <Widget>[
+                                CircularProgressIndicator(),
+                                Padding(
+                                  padding: EdgeInsets.only(left: width * 0.036),
+                                ),
+                                Text('로딩 중.....')
+                              ],
+                            ),
+                          ),
+                        );
                         _fetchQuizs().whenComplete(() {
                           return Navigator.push(
                             context,
