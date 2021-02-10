@@ -14,9 +14,10 @@
 
 ## 시뮬레이터 돌리기
 
-> Open simulator
+> Open simulator Ios or Android
 
 ```bash
+## 열려있는 시뮬레이터에 앱 모두 한번에 켜기
 $ flutter run -d all
 ```
 
